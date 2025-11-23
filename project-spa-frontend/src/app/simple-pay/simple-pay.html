@@ -1,1 +1,48 @@
-<p>simple-pay works!</p>
+<div class="container mt-4">
+<header class="mb-3 text-center">
+<h2 class="mb-3">SimplePay Demo</h2>
+<p>This demo will move fake money between three accounts (A, B, C) with one button.</p>
+</header>
+<section class="row mb-4 text-center">
+<article class="col-md-4 card p-3">
+    <h3>Account A</h3>
+    <p class="fs-3 fw-bold">${{ balances.A }}</p>
+</article>
+
+<article class="col-md-4 card p-3">
+    <h3>Account B</h3>
+    <p class="fs-3 fw-bold">${{ balances.B }}</p>
+</article>
+
+<article class="col-md-4 card p-3">
+    <h3>Account C</h3>
+    <p class="fs-3 fw-bold">${{ balances.C }}</p>
+</article>
+</section>
+
+<form class="card p-3" (ngSubmit)="makePayment()">
+<label class="form-label">Amount
+    <input type="number" class="form-control" [(ngModel)]="amount" name="amount">
+</label>
+
+<p class="mt-3 mb-2">Direction</p>
+
+<span class="btn-group mb-3" role="group">
+    <input type="radio" class="btn-check" id="AtoB" value="AtoB" [(ngModel)]="direction" name="direction">
+    <label class="btn btn-outline-primary" for="AtoB">A -> B</label>
+    <input type="radio" class="btn-check" id="AtoC" value="AtoC" [(ngModel)]="direction" name="direction">
+    <label class="btn btn-outline-primary" for="AtoC">A -> C</label>
+    <input type="radio" class="btn-check" id="BtoA" value="BtoA" [(ngModel)]="direction" name="direction">
+    <label class="btn btn-outline-primary" for="BtoA">B -> A</label>
+    <input type="radio" class="btn-check" id="BtoC" value="BtoC" [(ngModel)]="direction" name="direction">
+    <label class="btn btn-outline-primary" for="BtoC">B -> C</label>
+    <input type="radio" class="btn-check" id="CtoA" value="CtoA" [(ngModel)]="direction"name="direction">
+    <label class="btn btn-outline-primary" for="CtoA">C -> A</label>
+    <input type="radio" class="btn-check" id="CtoB" value="CtoB" [(ngModel)]="direction" name="direction">
+    <label class="btn btn-outline-primary" for="CtoB">C -> B</label>
+</span>
+
+<button type="submit" class="btn btn-success">Send Money</button>
+</form>
+<p *ngIf="message" class="alert alert-info mt-3">{{ message }}</p>
+</div>
