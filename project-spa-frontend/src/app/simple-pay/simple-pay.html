@@ -19,30 +19,34 @@
     <p class="fs-3 fw-bold">${{ balances.C }}</p>
 </article>
 </section>
-
 <form class="card p-3" (ngSubmit)="makePayment()">
-<label class="form-label">Amount
-    <input type="number" class="form-control" [(ngModel)]="amount" name="amount">
-</label>
-
-<p class="mt-3 mb-2">Direction</p>
-
-<span class="btn-group mb-3" role="group">
+  <h4 class="mb-3">Checkout with SimplePay</h4>
+  <label class="form-label">Amount<input type="number" class="form-control" [(ngModel)]="amount" name="amount"min="1"> </label>
+  <p class="mt-3 mb-2">Choose who sends money to who (like selecting a PayPal funding source):</p>
+  <span class="btn-group mb-3" role="group">
     <input type="radio" class="btn-check" id="AtoB" value="AtoB" [(ngModel)]="direction" name="direction">
-    <label class="btn btn-outline-primary" for="AtoB">A -> B</label>
-    <input type="radio" class="btn-check" id="AtoC" value="AtoC" [(ngModel)]="direction" name="direction">
-    <label class="btn btn-outline-primary" for="AtoC">A -> C</label>
-    <input type="radio" class="btn-check" id="BtoA" value="BtoA" [(ngModel)]="direction" name="direction">
-    <label class="btn btn-outline-primary" for="BtoA">B -> A</label>
-    <input type="radio" class="btn-check" id="BtoC" value="BtoC" [(ngModel)]="direction" name="direction">
-    <label class="btn btn-outline-primary" for="BtoC">B -> C</label>
-    <input type="radio" class="btn-check" id="CtoA" value="CtoA" [(ngModel)]="direction"name="direction">
-    <label class="btn btn-outline-primary" for="CtoA">C -> A</label>
-    <input type="radio" class="btn-check" id="CtoB" value="CtoB" [(ngModel)]="direction" name="direction">
-    <label class="btn btn-outline-primary" for="CtoB">C -> B</label>
-</span>
+    <label class="btn btn-outline-primary" for="AtoB">A → B</label>
 
-<button type="submit" class="btn btn-success">Send Money</button>
+    <input type="radio" class="btn-check" id="AtoC" value="AtoC" [(ngModel)]="direction" name="direction">
+    <label class="btn btn-outline-primary" for="AtoC">A → C</label>
+
+    <input type="radio" class="btn-check" id="BtoA" value="BtoA" [(ngModel)]="direction" name="direction">
+    <label class="btn btn-outline-primary" for="BtoA">B → A</label>
+
+    <input type="radio" class="btn-check" id="BtoC" value="BtoC" [(ngModel)]="direction" name="direction">
+    <label class="btn btn-outline-primary" for="BtoC">B → C</label>
+
+    <input type="radio" class="btn-check" id="CtoA" value="CtoA" [(ngModel)]="direction" name="direction">
+    <label class="btn btn-outline-primary" for="CtoA">C → A</label>
+
+    <input type="radio" class="btn-check" id="CtoB" value="CtoB" [(ngModel)]="direction" name="direction">
+    <label class="btn btn-outline-primary" for="CtoB">C → B</label>
+  </span>
+  <button type="submit" class="btn btn-paypal w-100 mt-2">
+    <span>Pay with</span>
+    <strong>SimplePay</strong>
+  </button>
 </form>
+
 <p *ngIf="message" class="alert alert-info mt-3">{{ message }}</p>
 </div>
