@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+declare var paypal: any;
 
 type Direction = 'AtoB' | 'AtoC' | 'BtoA' | 'BtoC' | 'CtoA' | 'CtoB';
 @Component({
@@ -8,7 +9,7 @@ type Direction = 'AtoB' | 'AtoC' | 'BtoA' | 'BtoC' | 'CtoA' | 'CtoB';
   templateUrl: './simple-pay.html',
   styleUrl: './simple-pay.css',
 })
-export class SimplePay implements OnInit {
+export class SimplePay implements OnInit, AfterViewInit {
   balances: {A: number, B: number, C: number} = {
     A: 0, 
     B: 0, 
@@ -80,5 +81,25 @@ export class SimplePay implements OnInit {
           this.message = err.error?.error || err.error?.message || `Error making payment: ${err.message}`;
         }
       });
+  }
+  ngAfterViewInit(): void {
+    paypal.Buttons({
+      createOrder: (data: any, actions: any) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: this.amount.toString(),
+              currency_code: 'CAD'
+            }
+          }]
+        });
+      },
+      onApprove: (data: any, actions: any) => {
+        return actions.order.capture().then((details: any) => {
+          this.message = `The PayPal payment is completed by ${details.payer.name.given_name}`;
+          this.makePayment();
+        });
+      }
+    }).render('#paypal-button-container');
   }
 }
