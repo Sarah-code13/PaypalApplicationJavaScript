@@ -16,7 +16,7 @@ export class SimplePay implements OnInit, AfterViewInit {
   amount = 20;
   direction: Direction = 'AtoB';
   message = '';
-  apiUrl = 'http://localhost:3000/api';
+  apiUrl = 'https://paypalapplicationjavascript-1.onrender.com/api';
 
   constructor(private http: HttpClient) {
     this.getBalances();
